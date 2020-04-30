@@ -3,21 +3,13 @@ const mysql = require('../../config/database');
 module.exports = {
     create: (data, callBack) => {
         mysql.query(
-            `INSERT INTO Users(username, age, email, password, phone, language, type, profession, experience, country, description, skills)
+            `INSERT INTO Users(username, age, email, password, phone, 
+                language, type, profession, experience, country, description, skills)
             values(?,?,?,?,?,?,?,?,?,?,?,?)`,
-            [
-                data.username,
-                data.age,
-                data.email,
-                data.password,
-                data.phone,
-                data.language,
-                data.type,
-                data.profession,
-                data.experience,
-                data.country,
-                data.description,
-                data.skills
+            [ 
+                data.username, data.age, data.email, data.password, data.phone,
+                data.language, data.type, data.profession, data.experience,
+                data.country, data.description, data.skills 
             ],
             (error, results, fields) => {
                 if(error) {
@@ -56,7 +48,8 @@ module.exports = {
             `UPDATE Users SET username=?, age=?, email=?, password=?, phone=?, 
             language=?, type=?, profession=?, experience=?, country=?, description=?, 
             skills=? WHERE id = ?`,
-            [ data.username, data.age, data.email, data.password, data.phone, 
+            [ 
+                data.username, data.age, data.email, data.password, data.phone, 
                 data.language, data.type, data.profession, data.experience, 
                 data.country, data.description, data.skills, data.id 
             ],
