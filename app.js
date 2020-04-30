@@ -1,28 +1,16 @@
-const express = require(`express`)
-const bodyParser = require(`body-parser`)
-const cors = require(`cors`)
-const jwt = require(`jsonwebtoken`)
-const bcrypt = require(`bcrypt`)
+require(`dotenv`).config();
+const express = require(`express`);
+const app = express();
+const userRouter = require(`./api/users/user.router`);
+const cors = require(`cors`);
+const bodyParser = require(`body-parser`);
 
-const app = express()
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
-app.use(bodyParser.json())
-app.use(cors())
+app.use(`/api/users`, userRouter);
 
-require(`dotenv`).config()
-process.env.SECRET_KEY = `secret`
-
-app.use(bodyParser.urlencoded({
-    extended: true
-}))
-
-app.get(`/`, (req, res) => {
-    res.json({
-        message: `Welcome to noBord Database API.`
-    })
-})
-
-require(`./routes/userRoutes`)(app)
-
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}.`))
+app.listen(process.env.APP_PORT, () => {
+    console.log('Server is running on :', process.env.APP_PORT);
+});
