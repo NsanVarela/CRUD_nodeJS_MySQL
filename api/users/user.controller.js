@@ -17,6 +17,7 @@ module.exports = {
             }
             return res.status(200).json({
                 succes: 1,
+                message: `User create in database`,
                 data: results
             })
         })
